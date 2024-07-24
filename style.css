@@ -260,6 +260,9 @@ button {
 
 .cart img {
     border-radius: 10px;
+    object-fit: cover;
+    width:100rm;
+    height:300px;
 }
 
 .cart .money {

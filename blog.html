@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="stylesheet" href="blog.css">
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
@@ -19,7 +20,7 @@
                 </a>
                 <li><a href="index.html">Home</a></li>
                 <li><a href="shop.html">Shop</a></li>
-                <li><a class="actives" href="blog.html">Blog</a></li>
+                <li><a class="actives" href="blog.html">Add products</a></li>
                 <li><a href="about.html">About</a></li>
                 <li><a href="contact.html">Contact</a></li>
                 <li><a href="cart.html"><i id="bag" class="fas -regular fa-bag-shopping"></i></a></li>
@@ -33,9 +34,34 @@
             <i id="bar" class="fas fa-outdent"></i>
         </div>
     </nav>
-    <h1>What huh looking for blog go watch hamro sisan dai ko blog</h1>
-    <a href="https://www.youtube.com/@SisanBaniya" target="_blank"></a>
-    <script src="working.js"></script>
+    <h1>E-commerce Product Management</h1>
+
+    <form id="productForm">
+        <input type="hidden" id="productId">
+        <div>
+            <label for="name">Product Name:</label>
+            <input type="text" id="name" required>
+        </div>
+        <div>
+            <label for="price">Price:</label>
+            <input type="number" id="price" step="0.01" required>
+        </div>
+        <div>
+            <label for="image">Image:</label>
+            <input type="file" id="image" required>
+        </div>
+        <button type="submit">Submit</button>
+    </form>
+
+
+
+
+    <div id="products"></div>
+
+    <script src="script.js"></script>
+
+
+
 </body>
 
 </html>
