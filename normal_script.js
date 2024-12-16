@@ -1,7 +1,7 @@
 document.addEventListener("DOMContentLoaded", () => {
   const productForm = document.getElementById("productForm");
   const productsDiv = document.getElementById("products");
-  const apiUrl = "http://localhost:3000/product"; // Ensure this is correct
+  const apiUrl = "http://localhost:3000/product";
 
   fetchProducts();
 

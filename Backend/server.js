@@ -23,7 +23,20 @@ connection.connect((err) => {
   if (err) throw err;
   console.log("Connected to MySQL database!");
 });
-
+connection.query("SHOW TABLES LIKE 'users'", (err, results) => {
+  if (err) {
+    console.error("Error checking tables:", err);
+    return;
+  }
+  console.log("Users table exists:", results.length > 0);
+});
+connection.query("SHOW TABLES LIKE 'products'", (err, results) => {
+  if (err) {
+    console.error("Error checking tables:", err);
+    return;
+  }
+  console.log("Users table exists:", results.length > 0);
+});
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
     cb(null, "uploads/");
