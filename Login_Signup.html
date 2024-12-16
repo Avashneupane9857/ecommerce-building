@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login & Signup</title>
+    <link rel="stylesheet" href="Signup_Login.css">
+</head>
+
+<body>
+    <div class="container">
+        <!-- Signup Form -->
+        <div class="form-container" id="signup-form">
+            <h2>Signup</h2>
+            <form id="signup">
+                <div class="form-group">
+                    <label for="signup-username">Username</label>
+                    <input type="text" id="signup-username" placeholder="Enter your username" required>
+                </div>
+                <div class="form-group">
+                    <label for="signup-email">Email</label>
+                    <input type="email" id="signup-email" placeholder="Enter your email" required>
+                </div>
+                <div class="form-group">
+                    <label for="signup-password">Password</label>
+                    <input type="password" id="signup-password" placeholder="Enter your password" required>
+                </div>
+                <button type="button" onclick="signup()">Signup</button>
+                <p class="toggle" onclick="showLogin()">Already have an account? Login</p>
+            </form>
+        </div>
+
+        <!-- Login Form -->
+        <div class="form-container" id="login-form" style="display: none;">
+            <h2>Login</h2>
+            <form id="login">
+                <div class="form-group">
+                    <label for="login-email">Email</label>
+                    <input type="email" id="login-email" placeholder="Enter your email" required>
+                </div>
+                <div class="form-group">
+                    <label for="login-password">Password</label>
+                    <input type="password" id="login-password" placeholder="Enter your password" required>
+                </div>
+                <button type="button" onclick="login()">Login</button>
+                <p class="toggle" onclick="showSignup()">Don't have an account? Signup</p>
+            </form>
+        </div>
+    </div>
+
+    <script src="New_script.js"></script>
+</body>
+
+</html>

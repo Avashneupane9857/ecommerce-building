@@ -5,7 +5,9 @@ const multer = require("multer");
 const path = require("path");
 const cors = require("cors"); // Add this line
 const app = express();
-
+const bcrypt = require("bcrypt");
+const jwt = require("jsonwebtoken");
+const SECRET_KEY = "Saibaba9857@";
 app.use(cors()); // Add this line
 app.use(bodyParser.json());
 app.use(express.static("uploads")); // Serve static files from the "uploads" directory
@@ -83,6 +85,76 @@ app.delete("/product/:id", (req, res) => {
   connection.query(sql, [id], (err, result) => {
     if (err) throw err;
     res.send("Product deleted successfully!");
+  });
+});
+
+//login and signup
+app.post("/signup", async (req, res) => {
+  const { username, email, password } = req.body;
+  console.log(req.body);
+  // Validate input
+  if (!username || !email || !password) {
+    return res.status(400).send("All fields are required");
+  }
+
+  try {
+    // Hash the password
+    const hashedPassword = await bcrypt.hash(password, 10);
+
+    // Insert user into the database
+    const sql =
+      "INSERT INTO users (username, email, password) VALUES (?, ?, ?)";
+    connection.query(sql, [username, email, hashedPassword], (err, result) => {
+      if (err) {
+        if (err.code === "ER_DUP_ENTRY") {
+          return res.status(400).send("Username or email already exists");
+        }
+        throw err;
+      }
+      res.status(201).send("User registered successfully!");
+    });
+  } catch (err) {
+    console.log(err);
+    res.status(500).send("Server error");
+  }
+});
+
+// User Login
+app.post("/login", (req, res) => {
+  const { email, password } = req.body;
+
+  // Validate input
+  if (!email || !password) {
+    return res.status(400).send("All fields are required");
+  }
+
+  // Find the user in the database
+  const sql = "SELECT * FROM users WHERE email = ?";
+  connection.query(sql, [email], async (err, results) => {
+    if (err) throw err;
+
+    if (results.length === 0) {
+      return res.status(400).send("Invalid email or password");
+    }
+
+    const user = results[0];
+
+    // Compare the password
+    const isPasswordMatch = await bcrypt.compare(password, user.password);
+    if (!isPasswordMatch) {
+      return res.status(400).send("Invalid email or password");
+    }
+
+    // Generate a token
+    const token = jwt.sign(
+      { id: user.id, username: user.username },
+      SECRET_KEY,
+      {
+        expiresIn: "1h",
+      }
+    );
+
+    res.json({ message: "Login successful", token });
   });
 });
 
